@@ -1,46 +1,38 @@
 using NUnit.Framework;
-using Coypu;
-using Coypu.Drivers.Selenium;
-using System.Threading;
+using NinjaPlus.Pages;
+using NinjaPlus.Common;
 
 namespace NinjaPlus.Tests
 {
-    public class LoginTests
+    public class LoginTests : BaseTest
     {
-        public BrowserSession browser;
+        private LoginPage _login;
+        private SideBar _side;
 
         [SetUp]
-        public void Setup()
+        public void Start()
         {
-            var configs = new SessionConfiguration
-            {
-                AppHost = "http://ninjaplus-web",
-                Port = 5000,
-                SSL = false,
-                Driver = typeof(SeleniumWebDriver),
-                Browser = Coypu.Drivers.Browser.Chrome
-            };
-            browser = new BrowserSession(configs);
-
-            browser.MaximiseWindow();
+            _login = new LoginPage(Browser);
+            _side = new SideBar(Browser);
         }
 
-        [TearDown]
-        public void Finish()
-        {
-            browser.Dispose();
-        }
         [Test]
-        public void SuccessfullyLogin()
+        [Category("Critical")]
+        public void ShouldSeeLoggedUser()
         {
-            browser.Visit("/login");
+            _login.With("root@carol.com", "pwd123");
+            Assert.AreEqual("Carol", _side.LoggedUser());
+        }
 
-            browser.FillIn("email").With("root@carol.com");
-            browser.FindCss("input[placeholder=senha]").SendKeys("pwd123");
-            browser.ClickButton("Entrar");
-
-            var loggedUser = browser.FindCss(".user .info span");
-            Assert.AreEqual("Carol", loggedUser.Text);
+        //DDT - Data Driven Testing 
+        [TestCase("root@carol.com", "123456", "Usuário e/ou senha inválidos")]
+        [TestCase("404@carol.com", "pwd123", "Usuário e/ou senha inválidos")]
+        [TestCase("", "pwd123", "Opps. Cadê o email?")]
+        [TestCase("root@carol.com", "", "Opps. Cadê a senha?")]
+        public void ShouldSeeAlertMessage(string email, string pass, string expectMessage)
+        {
+            _login.With(email, pass);
+            Assert.AreEqual(expectMessage, _login.AlertMessage());
         }
     }
 }
