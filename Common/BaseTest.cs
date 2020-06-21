@@ -34,6 +34,13 @@ namespace NinjaPlus.Common
 
         }
 
+        public string CoverPath()
+        {
+            var outputPath = Environment.CurrentDirectory;
+            return outputPath = outputPath + "/Images/";
+
+        }
+
         [TearDown]
         public void Finish()
         {
