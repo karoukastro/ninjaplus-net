@@ -3,6 +3,7 @@ using System.Threading;
 using Coypu;
 using NinjaPlus.Models;
 using OpenQA.Selenium;
+using System.Linq;
 
 namespace NinjaPlus.Pages
 {
@@ -57,7 +58,28 @@ namespace NinjaPlus.Pages
             InputCast(movie.Cast);
             _browser.FindCss("textarea[name=overview]").SendKeys(movie.Plot);
             UploadCover(movie.Cover);
-            
+            _browser.ClickButton("Cadastrar");
+       }
+
+       public bool HasMovie(string title)
+       {
+           return _browser.FindCss("table tbody tr", text: title).Exists();
+       }
+
+        public void Search(string value)
+       {
+            _browser.FindCss("input[placeholder^=Pesquisar]").SendKeys(value);
+            _browser.FindId("search-movie").Click();
+       }
+
+       public int CountMovie()
+       {
+           return _browser.FindAllCss("table tbody tr").Count();
+       }
+
+        public string SearchAlert()
+       {    
+           return _browser.FindCss(".alert-dark").Text;
        }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Coypu;
 using Coypu.Drivers.Selenium;
+using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 
 namespace NinjaPlus.Common
@@ -18,17 +19,32 @@ namespace NinjaPlus.Common
         [SetUp]
         public void Setup()
         {
-            var configs = new SessionConfiguration
+
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("config.json")
+                .Build();
+            
+            var sessionConfig = new SessionConfiguration
             {
                 AppHost = "http://ninjaplus-web",
                 Port = 5000,
                 SSL = false,
                 Driver = typeof(SeleniumWebDriver),
-                Browser = Coypu.Drivers.Browser.Chrome,
+                //Browser = Coypu.Drivers.Browser.Firefox,
                 Timeout = TimeSpan.FromSeconds(10)
             };
 
-            Browser = new BrowserSession(configs);
+            if (config["browser"].Equals("chrome"))
+            {
+                sessionConfig.Browser = Coypu.Drivers.Browser.Chrome;
+            }
+
+            if (config["browser"].Equals("firefox"))
+            {
+                sessionConfig.Browser = Coypu.Drivers.Browser.Firefox;
+            }
+
+            Browser = new BrowserSession(sessionConfig);
 
             Browser.MaximiseWindow();
 
