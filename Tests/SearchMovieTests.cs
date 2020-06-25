@@ -23,7 +23,7 @@ namespace NinjaPlus.Tests
         [Test]
         public void ShouldFindUniqueMovie()
         {
-            var target = "Carol";
+            var target = "Coringa";
             _movie.Search(target);
             Assert.That(
                 _movie.HasMovie(target), 

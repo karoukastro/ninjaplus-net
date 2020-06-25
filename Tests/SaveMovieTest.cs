@@ -44,29 +44,5 @@ namespace NinjaPlus.Tests
                 _movie.HasMovie(movieData.Title), 
                 $"Erro ao verificar se o filme {movieData.Title} foi cadastrado.");  
         }
-
-
-        [Test]
-        public void ShouldSaveMovie2()
-        {
-            var movieData = new MovieModel()
-            {
-                Title = "Jumanji - Próxima fase",
-                Status = "Em breve",
-                Year = 2020,
-                ReleaseDate = "16/01/2020",
-                Cast = {"The Rock", "Jack Black", "Kevin Hart", "Karen Gillan", "Danny DeVito"},
-                Plot = "Tentando a revisitar o mundo de Jumanji, Spencer decide consertar o bug no jogo do game que permite que sejam transportados ao local",
-                Cover = CoverPath() + "jumanji2.jpg"
-            };
-
-            Database.RemoveByTitle(movieData.Title);
-
-            _movie.Add();
-            _movie.Save(movieData);
-            Assert.That(
-                _movie.HasMovie(movieData.Title), 
-                $"Erro ao verificar se o filme {movieData.Title} foi cadastrado.");        
-        }
     }
 }

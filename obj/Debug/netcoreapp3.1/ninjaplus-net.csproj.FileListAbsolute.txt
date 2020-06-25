@@ -98,7 +98,6 @@
 /Users/carol/Documents/qaninja/ninjaplus-net/bin/Debug/netcoreapp3.1/WebDriver.dll
 /Users/carol/Documents/qaninja/ninjaplus-net/bin/Debug/netcoreapp3.1/Images/resident-evil-poster-2002.jpg
 /Users/carol/Documents/qaninja/ninjaplus-net/bin/Debug/netcoreapp3.1/Npgsql.dll
-/Users/carol/Documents/qaninja/ninjaplus-net/bin/Debug/netcoreapp3.1/Images/jumanji2.jpg
 /Users/carol/Documents/qaninja/ninjaplus-net/bin/Debug/netcoreapp3.1/Data/data.sql
 /Users/carol/Documents/qaninja/ninjaplus-net/bin/Debug/netcoreapp3.1/config.json
 /Users/carol/Documents/qaninja/ninjaplus-net/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Configuration.dll
@@ -109,3 +108,5 @@
 /Users/carol/Documents/qaninja/ninjaplus-net/bin/Debug/netcoreapp3.1/Microsoft.Extensions.FileProviders.Physical.dll
 /Users/carol/Documents/qaninja/ninjaplus-net/bin/Debug/netcoreapp3.1/Microsoft.Extensions.FileSystemGlobbing.dll
 /Users/carol/Documents/qaninja/ninjaplus-net/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Primitives.dll
+/Users/carol/Documents/qaninja/ninjaplus-net/bin/Debug/netcoreapp3.1/Data/data_old.sql
+/Users/carol/Documents/qaninja/ninjaplus-net/bin/Debug/netcoreapp3.1/Images/jumanji-2.jpg

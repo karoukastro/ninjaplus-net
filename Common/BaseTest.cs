@@ -1,5 +1,6 @@
 
 using System;
+using System.IO;
 using Coypu;
 using Coypu.Drivers.Selenium;
 using Microsoft.Extensions.Configuration;
@@ -57,10 +58,39 @@ namespace NinjaPlus.Common
 
         }
 
+        public void TakeScreenshot()
+        {
+            var resultId = TestContext.CurrentContext.Test.ID;
+            var shotPath = Environment.CurrentDirectory + "/Screenshots";
+
+            if(!Directory.Exists(shotPath))
+            {
+                Directory.CreateDirectory(shotPath);
+            }
+
+            var screenshot = $"{shotPath}/{resultId}.png";
+
+            Browser.SaveScreenshot(screenshot);
+            TestContext.AddTestAttachment(screenshot);
+        }
+
+
         [TearDown]
         public void Finish()
         {
+            try
+            {
+                TakeScreenshot();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ocorreu um erro ao capturar o Screenshot :(");
+                throw new Exception(e.Message);
+            }
+            finally
+            {
             Browser.Dispose();
-        }
+            }
+       }
     }
 }

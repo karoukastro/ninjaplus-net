@@ -1,0 +1,11 @@
+1) Instale o Homebrew https://brew.sh/index_pt-br
+2) Execute o comando: brew cask install chromedriver
+3) Execute o comando: brew install geckodriver
+
+
+Rodando testes com saída de relatório
+
+dotnet test --filter TestCategory=Critical -l trx -r ./reports
+
+
+dotnet test -l trx -r ./reports
